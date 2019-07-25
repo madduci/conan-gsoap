@@ -1,6 +1,6 @@
-from conans import ConanFile, AutoToolsBuildEnvironment, tools, CMake, RunEnvironment, MSBuild
+from conans import ConanFile, AutoToolsBuildEnvironment, tools, CMake
 from conans.errors import NotFoundException
-from conans.tools import os_info, SystemPackageTool, chdir
+from conans.tools import chdir
 import os
 
 
@@ -15,7 +15,7 @@ class GsoapConan(ConanFile):
     url = "https://github.com/bincrafters/conan-gsoap"
     homepage = "https://www.genivia.com/"
     author = "Bincrafters <bincrafters@gmail.com>"
-    license = "https://www.genivia.com/products.html#gsoap"  # Indicates license type of the packaged library; please use SPDX Identifiers https://spdx.org/licenses/
+    license = "gSOAP-1.3b"  # Indicates license type of the packaged library; please use SPDX Identifiers https://spdx.org/licenses/
     exports = ["LICENSE.md"]      # Packages the license for the conanfile.py
     # Remove following lines if the target lib does not use cmake.
     exports_sources = ["FindGSOAP.cmake", "src/*.cmake", "src/*.txt"]
@@ -42,10 +42,11 @@ class GsoapConan(ConanFile):
             self.requires("OpenSSL/1.1.1c@conan/stable")
 
     def source(self):
+        sha256 = "0d117633cb973dbd46a0bdcdcba74c67485aa9bc62b065e0ca621fdef9425dda"
         try:
-            tools.get("https://sourceforge.net/projects/gsoap2/files/{name}-{version_major}/{name}_{version}.zip/download".format(name=self.name, version_major=self.version_major, version=self.version))
+            tools.get("https://sourceforge.net/projects/gsoap2/files/{name}-{version_major}/{name}_{version}.zip/download".format(name=self.name, version_major=self.version_major, version=self.version), sha256=sha256)
         except NotFoundException:  # Maybe it has been moved to `oldreleases`
-            tools.get("https://sourceforge.net/projects/gsoap2/files/oldreleases/{name}_{version}.zip/download".format(name=self.name, version=self.version))
+            tools.get("https://sourceforge.net/projects/gsoap2/files/oldreleases/{name}_{version}.zip/download".format(name=self.name, version=self.version), sha256=sha256)
         # Rename to "source_subfolder" is a convention to simplify later steps
         extracted_dir = self.name + "-" + self.version_major
         os.rename(extracted_dir, self._source_subfolder)
@@ -85,8 +86,9 @@ class GsoapConan(ConanFile):
                                           '--enable-debug' if self.settings.build_type == 'Debug' else '',
                                           ],
                                     build=False)
-                env_build.make(args=["-j1", ],)  # Weird, but with -j2 it fails
-                env_build.make(args=['install', ])
+                with tools.environment_append(env_build.vars):
+                    self.run("make -j1")
+                    self.run("make install")
 
     def package(self):
         self.copy(pattern="LICENSE", dst="licenses", src=self._source_subfolder)
