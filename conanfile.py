@@ -32,14 +32,10 @@ class GsoapConan(ConanFile):
     _build_subfolder = "build_subfolder"
 
     def build_requirements(self):
-        # useful for example for conditional build_requires
         if self.settings.os == "Windows":
-            #if not tools.which("flex"):
             self.requires("winflexbison/2.5.15@bincrafters/stable")
         else:
-            #if not tools.which("yacc"):
             self.build_requires("bison/3.3.2@bincrafters/stable")
-            #if not tools.which("flex"):
             self.build_requires("flex/2.6.4@bincrafters/stable")
 
     def requirements(self):

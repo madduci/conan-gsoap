@@ -1,8 +1,7 @@
 
 # Generate project for wsdl2h
 
-set(WSDL2H_PATH ${GSOAP_PATH}/gsoap/wsdl/)
-# set(STDCPP2_PATH ${GSOAP_PATH}/gsoap/VisualStudio2005/wsdl/wsdl)
+set(WSDL2H_PATH ${CMAKE_SOURCE_DIR}/${GSOAP_PATH}/gsoap/wsdl)
 
 set(SRC_CPP
     ${WSDL2H_PATH}/wsdl2h.cpp

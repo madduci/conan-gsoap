@@ -12,11 +12,11 @@ conan_basic_setup(TARGETS)
 message("Generate gSOAP from sources at ${GSOAP_PATH}")
 
 # Tools
-include(${CMAKE_CURRENT_SOURCE_DIR}/src/soapcpp2.cmake)
-include(${CMAKE_CURRENT_SOURCE_DIR}/src/wsdl2h.cmake)
+include(${CMAKE_SOURCE_DIR}/src/soapcpp2.cmake)
+include(${CMAKE_SOURCE_DIR}/src/wsdl2h.cmake)
 
 # Libraries
-include(${CMAKE_CURRENT_SOURCE_DIR}/src/gsoap.cmake)
+include(${CMAKE_SOURCE_DIR}/src/gsoap.cmake)
 
-install(FILES ${GSOAP_PATH}/gsoap/typemap.dat DESTINATION /)
-install(DIRECTORY ${GSOAP_PATH}/gsoap/import DESTINATION /)
+install(FILES ${CMAKE_SOURCE_DIR}/${GSOAP_PATH}/gsoap/typemap.dat DESTINATION .)
+install(DIRECTORY ${CMAKE_SOURCE_DIR}/${GSOAP_PATH}/gsoap/import DESTINATION .)
