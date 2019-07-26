@@ -16,9 +16,8 @@ class GsoapConan(ConanFile):
     homepage = "https://www.genivia.com/"
     author = "Bincrafters <bincrafters@gmail.com>"
     license = "gSOAP-1.3b"  # Indicates license type of the packaged library; please use SPDX Identifiers https://spdx.org/licenses/
-    exports = ["LICENSE.md"]      # Packages the license for the conanfile.py
-    # Remove following lines if the target lib does not use cmake.
-    exports_sources = ["FindGSOAP.cmake", "src/*.cmake", "src/*.txt"]
+    exports = ["LICENSE.md", "FindGSOAP.cmake"]      # Packages the license for the conanfile.py
+    exports_sources = ["CMakeLists.txt", "src/*.cmake", "src/*.txt"]
     generators = "cmake"
     short_paths = True
     settings = "os", "arch", "compiler", "build_type"
@@ -32,12 +31,18 @@ class GsoapConan(ConanFile):
     _source_subfolder = "source_subfolder"
     _build_subfolder = "build_subfolder"
 
-    def requirements(self):
+    def build_requirements(self):
+        # useful for example for conditional build_requires
         if self.settings.os == "Windows":
+            #if not tools.which("flex"):
             self.requires("winflexbison/2.5.15@bincrafters/stable")
         else:
-            self.requires("bison/3.3.2@bincrafters/stable")
-            self.requires("flex/2.6.4@bincrafters/stable")
+            #if not tools.which("yacc"):
+            self.build_requires("bison/3.3.2@bincrafters/stable")
+            #if not tools.which("flex"):
+            self.build_requires("flex/2.6.4@bincrafters/stable")
+
+    def requirements(self):
         if self.options.with_openssl:
             self.requires("OpenSSL/1.1.1c@conan/stable")
 
@@ -67,28 +72,30 @@ class GsoapConan(ConanFile):
         return cmake
 
     def build(self):
-        if self.settings.os == "Windows":
-            cmake = self._configure_cmake()
-            cmake.build()
-            cmake.install()
-        else:
-            with chdir(self._source_subfolder):
-                self.run('chmod +x configure')
-                self.run('./configure --help')
-                env_build = AutoToolsBuildEnvironment(self)
-                self.run('autoreconf -f -i')  # Fix out of date aclocal
-                env_build.configure(args=['--prefix', self.package_folder,
-                                          '--with-openssl={}'.format(self.deps_cpp_info["OpenSSL"].rootpath),
-                                          '--with-zlib={}'.format(self.deps_cpp_info["zlib"].rootpath),
-                                          '--enable-ipv6' if self.options.with_ipv6 else '--disable-ipv6',
-                                          #'--enable-cookies' if self.options.with_cookies else '--disable-cookies',
-                                          '--enable-c-locale' if self.options.with_c_locale else '--disable-c-locale',
-                                          '--enable-debug' if self.settings.build_type == 'Debug' else '',
-                                          ],
-                                    build=False)
-                with tools.environment_append(env_build.vars):
-                    self.run("make -j1")
-                    self.run("make install")
+        cmake = self._configure_cmake()
+        cmake.build()
+        cmake.install()
+        # if self.settings.os == "Windows":
+        #     cmake = self._configure_cmake()
+        #     cmake.build()
+        #     cmake.install()
+        # else:
+        #     with chdir(self._source_subfolder):
+        #         self.run('chmod +x configure')
+        #         env_build = AutoToolsBuildEnvironment(self)
+        #         self.run('autoreconf -f -i')  # Fix out of date aclocal
+        #         env_build.configure(args=['--prefix', self.package_folder,
+        #                                   '--with-openssl={}'.format(self.deps_cpp_info["OpenSSL"].rootpath),
+        #                                   '--with-zlib={}'.format(self.deps_cpp_info["zlib"].rootpath),
+        #                                   '--enable-ipv6' if self.options.with_ipv6 else '--disable-ipv6',
+        #                                   #'--enable-cookies' if self.options.with_cookies else '--disable-cookies',
+        #                                   '--enable-c-locale' if self.options.with_c_locale else '--disable-c-locale',
+        #                                   '--enable-debug' if self.settings.build_type == 'Debug' else '',
+        #                                   ],
+        #                             build=False)
+        #         with tools.environment_append(env_build.vars):
+        #             self.run("make -j1")
+        #             self.run("make install")
 
     def package(self):
         self.copy(pattern="LICENSE", dst="licenses", src=self._source_subfolder)
