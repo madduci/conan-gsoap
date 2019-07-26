@@ -32,7 +32,7 @@ class GsoapConan(ConanFile):
 
     def build_requirements(self):
         if self.settings.os == "Windows":
-            self.requires("winflexbison/2.5.15@bincrafters/stable")
+            self.build_requires("winflexbison/2.5.18@bincrafters/stable")
         else:
             self.build_requires("bison/3.3.2@bincrafters/stable")
             self.build_requires("flex/2.6.4@bincrafters/stable")
