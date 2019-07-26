@@ -1,6 +1,5 @@
-from conans import ConanFile, AutoToolsBuildEnvironment, tools, CMake
+from conans import ConanFile, tools, CMake
 from conans.errors import NotFoundException
-from conans.tools import chdir
 import os
 
 
@@ -71,27 +70,6 @@ class GsoapConan(ConanFile):
         cmake = self._configure_cmake()
         cmake.build()
         cmake.install()
-        # if self.settings.os == "Windows":
-        #     cmake = self._configure_cmake()
-        #     cmake.build()
-        #     cmake.install()
-        # else:
-        #     with chdir(self._source_subfolder):
-        #         self.run('chmod +x configure')
-        #         env_build = AutoToolsBuildEnvironment(self)
-        #         self.run('autoreconf -f -i')  # Fix out of date aclocal
-        #         env_build.configure(args=['--prefix', self.package_folder,
-        #                                   '--with-openssl={}'.format(self.deps_cpp_info["OpenSSL"].rootpath),
-        #                                   '--with-zlib={}'.format(self.deps_cpp_info["zlib"].rootpath),
-        #                                   '--enable-ipv6' if self.options.with_ipv6 else '--disable-ipv6',
-        #                                   #'--enable-cookies' if self.options.with_cookies else '--disable-cookies',
-        #                                   '--enable-c-locale' if self.options.with_c_locale else '--disable-c-locale',
-        #                                   '--enable-debug' if self.settings.build_type == 'Debug' else '',
-        #                                   ],
-        #                             build=False)
-        #         with tools.environment_append(env_build.vars):
-        #             self.run("make -j1")
-        #             self.run("make install")
 
     def package(self):
         self.copy(pattern="LICENSE", dst="licenses", src=self._source_subfolder)
