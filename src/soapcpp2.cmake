@@ -41,7 +41,7 @@ else()
 
     add_custom_command(
         OUTPUT ${CMAKE_BINARY_DIR}/generated/lex.yy.c
-        COMMAND ${CONAN_FLEX_ROOT}/bin/flex -o ${CMAKE_BINARY_DIR}/generated/lex.yy.c ${STDCPP2_PATH}/soapcpp2_lex.l
+        COMMAND ${CONAN_FLEX_INSTALLER_ROOT}/bin/flex -o ${CMAKE_BINARY_DIR}/generated/lex.yy.c ${STDCPP2_PATH}/soapcpp2_lex.l
         COMMENT "Run FLEX on soapcpp2"
     )
 endif()

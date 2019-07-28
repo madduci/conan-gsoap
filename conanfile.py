@@ -35,7 +35,7 @@ class GsoapConan(ConanFile):
             self.build_requires("winflexbison/2.5.18@bincrafters/stable")
         else:
             self.build_requires("bison/3.3.2@bincrafters/stable")
-            self.build_requires("flex/2.6.4@bincrafters/stable")
+            self.build_requires("flex_installer/2.6.4@bincrafters/stable")
 
     def requirements(self):
         if self.options.with_openssl:
