@@ -28,7 +28,7 @@ if(WIN32)
 
     add_custom_command(
         OUTPUT ${CMAKE_BINARY_DIR}/generated/lex.yy.c
-        COMMAND ${CONAN_WINFLEXBISON_ROOT}/bin/win_flex.exe --wincompat -o ${CMAKE_BINARY_DIR}/generated/lex.yy.c ${STDCPP2_PATH}/soapcpp2_lex.l
+        COMMAND ${CONAN_WINFLEXBISON_ROOT}/bin/win_flex.exe -o ${CMAKE_BINARY_DIR}/generated/lex.yy.c ${STDCPP2_PATH}/soapcpp2_lex.l
         COMMENT "Run FLEX on soapcpp2"
     )
 
