@@ -24,8 +24,7 @@ class GsoapConan(ConanFile):
                "with_ipv6": [True, False],
                "with_cookies": [True, False],
                "with_c_locale": [True, False]}
-    default_options = "with_openssl=True", "with_ipv6=True", \
-                      "with_cookies=True", "with_c_locale=True"
+    default_options = {'with_openssl': True, 'with_ipv6': True, 'with_cookies': True, 'with_c_locale': True}
     # Custom attributes for Bincrafters recipe conventions
     _source_subfolder = "source_subfolder"
     _build_subfolder = "build_subfolder"

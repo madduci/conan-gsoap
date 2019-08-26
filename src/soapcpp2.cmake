@@ -52,6 +52,8 @@ add_custom_target(FLEXBISON_GENERATORS
         ${CMAKE_BINARY_DIR}/generated/lex.yy.c)
 
 
+add_dependencies(FLEXBISON_GENERATORS create-generated-folder)
+
 add_executable(soapcpp2 ${SRC_CPP})
 target_include_directories(soapcpp2 PRIVATE ${STDCPP2_PATH})
 set_source_files_properties(${SRC_CPP} PROPERTIES LANGUAGE C)
