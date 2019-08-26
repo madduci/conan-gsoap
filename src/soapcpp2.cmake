@@ -35,7 +35,7 @@ if(WIN32)
 else()
     add_custom_command(
         OUTPUT ${CMAKE_BINARY_DIR}/generated/soapcpp2_yacc.tab.c
-        COMMAND ${CONAN_BISON_ROOT}/bin/yacc -d -v -o ${CMAKE_BINARY_DIR}/generated/soapcpp2_yacc.tab.c ${STDCPP2_PATH}/soapcpp2_yacc.y
+        COMMAND ${CONAN_BISON_INSTALLER_ROOT}/bin/yacc -d -v -o ${CMAKE_BINARY_DIR}/generated/soapcpp2_yacc.tab.c ${STDCPP2_PATH}/soapcpp2_yacc.y
         COMMENT "Run YACC on soapcpp2"
     )
 

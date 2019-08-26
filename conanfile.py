@@ -6,7 +6,7 @@ import os
 class GsoapConan(ConanFile):
     name = "gsoap"
     version_major = "2.8"
-    version = version_major + ".88"
+    version = version_major + ".91"
     description = "The gSOAP toolkit is a C and C++ software development toolkit for SOAP and " \
                   "REST XML Web services and generic C/C++ XML data bindings."
     # topics can get used for searches, GitHub topics, Bintray tags etc. Add here keywords about the library
@@ -34,7 +34,7 @@ class GsoapConan(ConanFile):
         if self.settings.os == "Windows":
             self.build_requires("winflexbison/2.5.18@bincrafters/stable")
         else:
-            self.build_requires("bison/3.3.2@bincrafters/stable")
+            self.build_requires("bison_installer/3.3.2@bincrafters/stable")
             self.build_requires("flex_installer/2.6.4@bincrafters/stable")
 
     def requirements(self):
@@ -42,7 +42,7 @@ class GsoapConan(ConanFile):
             self.requires("OpenSSL/1.1.1c@conan/stable")
 
     def source(self):
-        sha256 = "effbf8a4533917b9eb3aa0e79db13573ef52e768158f5b4eb93d49b0c5cb2fa8"
+        sha256 = "2ca21b5ab2b40d899566c559f71a1d51ed7eac3f00160ab78060027a3ee6488f"
         try:
             tools.get("https://sourceforge.net/projects/gsoap2/files/{name}-{version_major}/{name}_{version}.zip/download".format(name=self.name, version_major=self.version_major, version=self.version), sha256=sha256)
         except NotFoundException:  # Maybe it has been moved to `oldreleases`
