@@ -17,6 +17,10 @@ message("Generate gSOAP from sources at ${GSOAP_PATH}")
 if(${BUILD_TOOLS})
   include(${CMAKE_SOURCE_DIR}/src/soapcpp2.cmake)
   include(${CMAKE_SOURCE_DIR}/src/wsdl2h.cmake)
+
+  install(FILES ${CMAKE_SOURCE_DIR}/${GSOAP_PATH}/gsoap/typemap.dat DESTINATION res)
+  install(DIRECTORY ${CMAKE_SOURCE_DIR}/${GSOAP_PATH}/gsoap/import DESTINATION .
+          FILES_MATCHING PATTERN "*.h")
 endif()
 
 # Libraries
@@ -24,6 +28,4 @@ if(${BUILD_GSOAP})
   include(${CMAKE_SOURCE_DIR}/src/gsoap.cmake)
 endif()
 
-install(FILES ${CMAKE_SOURCE_DIR}/${GSOAP_PATH}/gsoap/typemap.dat DESTINATION res)
-install(DIRECTORY ${CMAKE_SOURCE_DIR}/${GSOAP_PATH}/gsoap/import/ DESTINATION include
-        FILES_MATCHING PATTERN "*.h")
+

@@ -1,0 +1,50 @@
+[settings]
+
+
+[requires]
+    gsoap_installer/2.Y.Z
+
+[options]
+
+
+[full_settings]
+
+
+[full_requires]
+    OpenSSL/1.1.1c@conan/stable:444d1eb978f872e0f5e5a1a07145f79c475221ca
+    gsoap_installer/2.8.91@bincrafters/testing:e73844c01d2c881b443ebcb66d68e75d176dfc10
+    zlib/1.2.11@conan/stable:6af9cc7cb931c5ad942174fd7838eb655717c709
+
+[full_options]
+    OpenSSL:386=False
+    OpenSSL:no_asm=False
+    OpenSSL:no_async=False
+    OpenSSL:no_bf=False
+    OpenSSL:no_cast=False
+    OpenSSL:no_des=False
+    OpenSSL:no_dh=False
+    OpenSSL:no_dsa=False
+    OpenSSL:no_dso=False
+    OpenSSL:no_fpic=False
+    OpenSSL:no_hmac=False
+    OpenSSL:no_md2=False
+    OpenSSL:no_md5=False
+    OpenSSL:no_mdc2=False
+    OpenSSL:no_rc2=False
+    OpenSSL:no_rc4=False
+    OpenSSL:no_rc5=False
+    OpenSSL:no_rsa=False
+    OpenSSL:no_sha=False
+    OpenSSL:no_sse2=False
+    OpenSSL:no_threads=False
+    OpenSSL:no_zlib=False
+    OpenSSL:shared=False
+    zlib:fPIC=True
+    zlib:minizip=False
+    zlib:shared=False
+
+[recipe_hash]
+
+
+[env]
+
