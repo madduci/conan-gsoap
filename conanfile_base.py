@@ -6,7 +6,7 @@ import os
 class ConanFileBase(ConanFile):
     _base_name = "gsoap"
     version_major = "2.8"
-    version = version_major + ".94"
+    version = version_major + ".98"
     description = "The gSOAP toolkit is a C and C++ software development toolkit for SOAP and " \
                   "REST XML Web services and generic C/C++ XML data bindings."
     topics = ("conan", "gsoap", "logging")
@@ -28,7 +28,7 @@ class ConanFileBase(ConanFile):
         return "build_subfolder"
 
     def source(self):
-        sha256 = "092d90ec660dcaf4bfdbfe1f83259c2cdd4758b53ecdcc5da51c2741ebbb7b19"
+        sha256 = "56460362ca8f9decdf880d82601e50ae13fb2185582a704b037060acacb7fc3a"
         try:
             tools.get("https://sourceforge.net/projects/gsoap2/files/{name}-{version_major}/{name}_{version}.zip/download".format(name=self._base_name, version_major=self.version_major, version=self.version), sha256=sha256)
         except NotFoundException:  # Maybe it has been moved to `oldreleases`
