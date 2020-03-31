@@ -49,7 +49,7 @@ add_dependencies(wsdl2h WSDL2H_GENERATORS)
 if(${WITH_OPENSSL})
     target_include_directories(wsdl2h PRIVATE ${GSOAP_PATH}/gsoap/plugin)
     target_compile_definitions(wsdl2h PRIVATE WITH_OPENSSL WITH_GZIP)
-    target_link_libraries(wsdl2h CONAN_PKG::OpenSSL)
+    target_link_libraries(wsdl2h ${CONAN_LIBS})
 endif()
 
 install(TARGETS wsdl2h RUNTIME DESTINATION bin)

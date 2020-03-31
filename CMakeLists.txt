@@ -9,7 +9,7 @@ if(EXISTS "${CMAKE_BINARY_DIR}/conanbuildinfo.cmake")
 else()
   include(conanbuildinfo.cmake)
 endif()
-conan_basic_setup(TARGETS)
+conan_basic_setup()
 
 message("Generate gSOAP from sources at ${GSOAP_PATH}")
 
@@ -27,5 +27,3 @@ endif()
 if(${BUILD_GSOAP})
   include(${CMAKE_SOURCE_DIR}/src/gsoap.cmake)
 endif()
-
-
