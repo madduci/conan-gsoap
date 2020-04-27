@@ -16,7 +16,7 @@ class ConanFileInstaller(ConanFileBase):
             self.build_requires("flex_installer/2.6.4@bincrafters/stable")
 
     def requirements(self):
-        self.requires("OpenSSL/1.1.1c@conan/stable")
+        self.requires("openssl/1.1.1g")
 
     def _configure_cmake(self):
         cmake = CMake(self)

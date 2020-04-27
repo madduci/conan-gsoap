@@ -19,7 +19,8 @@ class ConanFileDefault(ConanFileBase):
 
     def requirements(self):
         if self.options.with_openssl:
-            self.requires("openssl/1.1.1f")
+            self.requires("openssl/1.1.1g")
+            self.requires("zlib/1.2.11")
 
     def _configure_cmake(self):
         cmake = CMake(self)
