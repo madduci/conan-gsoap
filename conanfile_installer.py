@@ -10,10 +10,10 @@ class ConanFileInstaller(ConanFileBase):
 
     def build_requirements(self):
         if self.settings.os_build == "Windows":
-            self.build_requires("winflexbison/2.5.18@bincrafters/stable")
+            self.build_requires("winflexbison/2.5.22")
         else:
-            self.build_requires("bison_installer/3.3.2@bincrafters/stable")
-            self.build_requires("flex_installer/2.6.4@bincrafters/stable")
+            self.build_requires("bison/3.5.3")
+            self.build_requires("flex/2.6.4")
 
     def requirements(self):
         self.requires("openssl/1.1.1g")
