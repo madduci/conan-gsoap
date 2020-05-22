@@ -35,13 +35,13 @@ if(WIN32)
 else()
     add_custom_command(
         OUTPUT ${CMAKE_BINARY_DIR}/generated/soapcpp2_yacc.tab.c
-        COMMAND ${CONAN_BISON_INSTALLER_ROOT}/bin/yacc -d -v -o ${CMAKE_BINARY_DIR}/generated/soapcpp2_yacc.tab.c ${STDCPP2_PATH}/soapcpp2_yacc.y
+        COMMAND ${CONAN_BISON_ROOT}/bin/yacc -d -v -o ${CMAKE_BINARY_DIR}/generated/soapcpp2_yacc.tab.c ${STDCPP2_PATH}/soapcpp2_yacc.y
         COMMENT "Run YACC on soapcpp2"
     )
 
     add_custom_command(
         OUTPUT ${CMAKE_BINARY_DIR}/generated/lex.yy.c
-        COMMAND ${CONAN_FLEX_INSTALLER_ROOT}/bin/flex -o ${CMAKE_BINARY_DIR}/generated/lex.yy.c ${STDCPP2_PATH}/soapcpp2_lex.l
+        COMMAND ${CONAN_FLEX_ROOT}/bin/flex -o ${CMAKE_BINARY_DIR}/generated/lex.yy.c ${STDCPP2_PATH}/soapcpp2_lex.l
         COMMENT "Run FLEX on soapcpp2"
     )
 endif()
